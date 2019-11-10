@@ -1,0 +1,85 @@
+4 clases -> [0,1,2,3]
+
+frontera01, frontera02, frontera03, frontera12, frontera13, frontera23
+
+muestraC = {}
+
+VOTACION
+
+votos = []
+
+for muestra in muestras:
+
+    if frontera01(muestra) == 0:
+        votos[0]++
+    else:
+        votos[1]++
+
+    if frontera02(muestra) == 0:
+        votos[0]++
+    else:
+        votos[2]++
+
+    if frontera03(muestra) == 0:
+        votos[0]++
+    else:
+        votos[3]++
+
+    if frontera12(muestra) == 1:
+        votos[1]++
+    else:
+        votos[2]++
+
+    if frontera13(muestra) == 1:
+        votos[1]++
+    else:
+        votos[3]++
+
+    if frontera23(muestra) == 2:
+        votos[2]++
+    else:
+        votos[3]++
+
+    muestraC[muestra] = getPos(max(votos))    
+    
+return muestraC
+
+DGA
+
+for muestra in muestras:
+
+    if frontera01(muestra) == 0:
+        if frontera02(muestra) == 0:
+            if frontera03(muestra) == 0:
+                muestraC[muesrta] = 0
+            else:
+                muestraC[muestra] = 3
+        else:
+            if frontera23(muestra) == 2:
+                muestraC[muestra] = 2
+            else:
+                muestraC[muestra] = 3
+    else:
+        if frontera12(muestra) == 1:
+            if frontera13(muestra) == 1:
+                muestraC[muestra] = 1
+            else:
+                muestraC[muestra] = 3
+        else:
+            if frontera23(muestra) == 2:
+                muestraC[muestra] = 2
+            else:
+                muestraC[muestra] = 3
+  
+return muestraC  
+
+
+
+
+
+
+
+
+
+
+
