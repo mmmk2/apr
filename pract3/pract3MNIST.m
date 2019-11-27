@@ -61,7 +61,7 @@ n
 
 seed
 
-err = nnexp(Wtr',trlabels,Wte',tslabels,k,n,b,seed);
+err = nnexp(Wtr',trlabels,Wte',tslabels,k,n,b,seed,numclases);
 
 printf("%d\t%d\n",k,err);
 
