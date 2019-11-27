@@ -2,7 +2,7 @@
 
 if (nargin!=14)
 printf("Usage: pract3MNIST.m <trdata> <trlabs> <tedata> <telabs> <mink> <stepk> <maxk> <minb> <stepb> <maxb> <minn> <stepn> <maxn> <seed> \n");
-#### ./pract3MNIST.m data/hart/tr.dat data/hart/trlabels.dat data/hart/ts.dat data/hart/tslabels.dat 2 0 2 0.8 0 0.8 5 0 5 23
+#### ./pract3MNIST.m data/hart/tr.dat data/hart/trlabels.dat data/hart/ts.dat data/hart/tslabels.dat 2 1 2 0.8 1 0.8 5 1 5 23
 exit(1);
 end
 
