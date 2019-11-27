@@ -1,19 +1,14 @@
-function err = nnexp(tr,trlabels,ts,tslabels,nOutput,nHidden,b,seed)
+function err = nnexp(tr,trlabels,ts,tslabels,nOutput,nHidden,b,seed,numclases)
 	mInput = tr';
 	mOutput = trlabels';
 	[rows, columns] = size(mOutput);
-	mOutputi = zeros(2,columns);
+	mOutputi = zeros(numclases,columns);
 	mTestInput = ts';
 	mTestOutput = tslabels';
 
 	for i = 1:columns
-	  if mOutput(i) == 1
-	     mOutputi(:,i) = [1,0];
-	     endif
-	  if mOutput(i) == 2  
-	     mOutputi(:,i) = [0,1];
-	     endif
-	  endfor
+            mOutputi(mOutput(i),i) = 1;
+	endfor
 
 	[nFeat, nSamples] = size(mInput);
 	nTr=floor(nSamples*b);
