@@ -405,7 +405,7 @@ expresionRelacional
     ;
 
 expresionAditiva
-    : expresionMultiplicativa { $$.tipo = $1.tipo; }
+    : expresionMultiplicativa { $$.tipo = $1.tipo; $$.pos = $1.pos; }
     | expresionAditiva operadorAditivo expresionMultiplicativa { $$.tipo = T_ERROR;
                                                                if($1.tipo != T_ERROR && $3.tipo != T_ERROR) {
                                                                    if($2 == OP_SUMA) {
@@ -413,11 +413,15 @@ expresionAditiva
                                                                            yyerror(ERROR_TIPOE);
                                                                        else
                                                                            $$.tipo = T_ENTERO;
+                                                                           $$.pos = creaVarTemp();
+                                                                           emite(ESUM, crArgPos($1.pos), crArgPos($3.pos), crArgPos($$.pos));
                                                                    } else if ($2 = OP_RESTA) {
                                                                        if($1.tipo != T_ENTERO || $3.tipo != T_ENTERO)
                                                                            yyerror(ERROR_TIPOE);
                                                                        else
                                                                            $$.tipo = T_ENTERO;
+                                                                           $$.pos = creaVarTemp();
+                                                                           emite(EDIF, crArgPos($1.pos), crArgPos($3.pos), crArgPos($$.pos));
                                                                    } else
                                                                        yyerror(ERROR_NOVALIDOP);
                                                                }
@@ -434,17 +438,21 @@ expresionMultiplicativa
                                                                                else
                                                                                    $$.tipo = T_ENTERO;
                                                                                    $$.pos = creaVarTemp();
-                                                                                   emite(EMOD, crArgEnt(1), crArgPos($2.pos), crArgPos($$.pos));
+                                                                                   emite(RESTO, crArgPos($1.pos), crArgPos($3.pos), crArgPos($$.pos));
                                                                            } else if ($2 == OP_DIV) {
                                                                                if($1.tipo != T_ENTERO || $3.tipo != T_ENTERO)
                                                                                    yyerror(ERROR_TIPOE);
                                                                                else
                                                                                    $$.tipo = T_ENTERO;
+                                                                                   $$.pos = creaVarTemp();
+                                                                                   emite(EDIVI, crArgPos($1.pos), crArgPos($3.pos), crArgPos($$.pos));
                                                                            } else if ($2 == OP_POR) {
                                                                                if($1.tipo != T_ENTERO || $3.tipo != T_ENTERO)
                                                                                    yyerror(ERROR_TIPOE);
                                                                                else
                                                                                    $$.tipo = T_ENTERO;
+                                                                                   $$.pos = creaVarTemp();
+                                                                                   emite(EMULT, crArgPos($1.pos), crArgPos($3.pos), crArgPos($$.pos));
                                                                            } else
                                                                                yyerror(ERROR_NOVALIDOP);
                                                                        }
